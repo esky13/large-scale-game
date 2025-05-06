@@ -82,12 +82,6 @@ while true
     sx2 = sx1;
     sy2 = sy1;
 
-    % [~,~,tx_f,ty_f] = find_optimal_RA(xD,yD,xA,yA,uA/uD);
-    % [thetaA2,tA] = ddi_target_theta(xA0,yA0,vAx0,vAy0,uA,tx_f,ty_f,mu);
-    % [thetaD2,tD] = ddi_target_theta(xD0,yD0,vDx0,vDy0,uD,tx_f,ty_f,mu);
-    % [xA,yA] = get_XY(Te,thetaA2,uA,xA0,yA0,vAx0,vAy0,mu);
-    % [xD,yD] = get_XY(Te,thetaD2,uD,xD0,yD0,vDx0,vDy0,mu);
-
     tt = min(tA,tD);
     draw_trajectory(thetaA2,thetaD2,tt,mu,uA,xA0,yA0,vAx0,vAy0,uD,xD0,yD0,vDx0,vDy0,ax1)
     i = i+1;
@@ -97,14 +91,4 @@ plot(tx_lst,ty_lst,'LineWidth',1,'Color',[0.5,0.5,0.5]);
 scatter(tx_lst,ty_lst,20,[0.5,0.5,0.5],'filled');
 scatter(tx,ty,50,'yellow','filled','pentagram');
 sqrt((op_tx-tx_f)^2+(op_ty-ty_f)^2)
-
-function [thetaP,thetaE,tx,ty] = find_optimal_RA(xP,yP,xE,yE,alpha)
-    xc = 1/(1-alpha^2)*(xE-alpha^2*xP);
-    yc = 1/(1-alpha^2)*(yE-alpha^2*yP);
-    rc = alpha/(1-alpha^2)*(sqrt((xE-xP)^2+(yE-yP)^2));
-    tx = xc-cos(atan2(yc,xc))*rc;
-    ty = yc-sin(atan2(yc,xc))*rc;
-    thetaP = atan2(ty-yP,tx-xP);
-    thetaE = atan2(ty-yE,tx-xE);
-end
 
